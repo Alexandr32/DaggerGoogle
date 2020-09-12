@@ -33,8 +33,4 @@ open class MyApplication : Application() {
         // аннотацией, мы можем вызвать .factory()
         DaggerAppComponent.factory().create(applicationContext)
     }
-
-    open val userManager by lazy {
-        UserManager(SharedPreferencesStorage(this))
-    }
 }

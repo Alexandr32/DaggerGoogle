@@ -3,12 +3,17 @@ package com.example.android.dagger.di
 import android.content.Context
 import com.example.android.dagger.main.MainActivity
 import com.example.android.dagger.registration.RegistrationActivity
-import com.example.android.dagger.registration.RegistrationViewModel
+import com.example.android.dagger.registration.enterdetails.EnterDetailsFragment
+import com.example.android.dagger.registration.termsandconditions.TermsAndConditionsFragment
+import com.example.android.dagger.settings.SettingsActivity
+import com.example.android.dagger.user.UserManager
 import dagger.BindsInstance
 import dagger.Component
+import javax.inject.Singleton
 
 // говорит где использовать внедрение зависимостей
-@Component(modules = [StorageModule::class])
+@Singleton
+@Component(modules = [StorageModule::class, AppSubcomponents::class])
 interface AppComponent {
 
     // фабрика для контекста
@@ -19,9 +24,15 @@ interface AppComponent {
         fun create(@BindsInstance context: Context): AppComponent
     }
 
-    // сообщаем Dagger, что RegistrationActivity запрашивает инъекцию и что он должен предоставить
-    // зависимости, которые аннотируются с помощью @Inject (то есть, RegistrationViewModel).
-    fun inject(registrationActivity: RegistrationActivity)
+    // Expose RegistrationComponent factory from the graph
+    fun registrationComponent(): RegistrationComponent.Factory
 
-    fun inject(activity: MainActivity)
+    fun loginComponent(): LoginComponent.Factory
+
+    fun userManager(): UserManager
+
+    /*fun inject(activity: MainActivity)
+
+    fun inject(activity: SettingsActivity)*/
+
 }
