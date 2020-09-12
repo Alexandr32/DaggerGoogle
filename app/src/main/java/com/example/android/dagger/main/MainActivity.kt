@@ -27,6 +27,7 @@ import com.example.android.dagger.login.LoginActivity
 import com.example.android.dagger.registration.RegistrationActivity
 import com.example.android.dagger.settings.SettingsActivity
 
+// https://codelabs.developers.google.com/codelabs/android-dagger/#1
 class MainActivity : AppCompatActivity() {
 
     private lateinit var mainViewModel: MainViewModel
