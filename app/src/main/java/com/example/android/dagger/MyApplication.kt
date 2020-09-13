@@ -25,12 +25,21 @@ import com.example.android.dagger.user.UserManager
 open class MyApplication : Application() {
 
     // Instance of the AppComponent that will be used by all the Activities in the project
-    val appComponent: AppComponent by lazy {
+    /*val appComponent: AppComponent by lazy {
         // Creates an instance of AppComponent using its Factory constructor
         // We pass the applicationContext that will be used as Context in the graph
 
         // Поскольку мы определили фабрику компонентов с @Component.Factory
         // аннотацией, мы можем вызвать .factory()
         DaggerAppComponent.factory().create(applicationContext)
+
+    }*/
+
+    val appComponent: AppComponent by lazy {
+        initializeComponent()
+    }
+
+    open fun initializeComponent(): AppComponent {
+        return DaggerAppComponent.factory().create(applicationContext)
     }
 }
